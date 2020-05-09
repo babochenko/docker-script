@@ -1,5 +1,7 @@
 ## Dockerfile One-Line Runner
 
+![https://travis-ci.com/github/stasmihailov/dockerfile-runner](https://api.travis-ci.com/stasmihailov/dockerfile-runner.svg?branch=master)
+
 **THIS PLUGIN IS NOT IMPLEMENTED YET!!!**
 
 Adds ability to build AND run Dockerfiles in one command via `docker script` command. Also cleans up
@@ -42,5 +44,5 @@ docker script <<< 'EOF'
 ### Installation
 
 ```shell script
-docker plugin install .../dockerfile-runner
+docker plugin install [...]/dockerfile-runner
 ```
