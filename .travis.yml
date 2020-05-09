@@ -1,0 +1,11 @@
+os: linux
+language: golang
+
+env:
+  - executable: "docker-script-plugin-executable"
+
+script:
+- go build -o $executable
+- mkdir -p ~/.docker/cli-plugins
+- cp $executable ~/.docker/cli-plugins
+- .travis/test-simple.sh
