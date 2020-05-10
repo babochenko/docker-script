@@ -1,4 +1,4 @@
-package main
+package test
 
 import (
 	"io/ioutil"
@@ -19,7 +19,7 @@ func TestDoesExecuteSimpleDockerfile(t *testing.T) {
 		return
 	}
 
-	result, err := execCommand(t, "docker", "script", ".")
+	result, err := execCommand(t, nil, "docker", "script", ".")
 	if err != nil {
 		return
 	}
@@ -29,11 +29,35 @@ func TestDoesExecuteSimpleDockerfile(t *testing.T) {
 	assertEquals(t, expectedResult, actualResult)
 }
 
-func execCommand(t *testing.T, name string, arg ...string) (string, error) {
+func TestDoesExecuteDockerfileFromStdin(t *testing.T) {
+	// language=dockerfile
+	fileText := `FROM alpine
+		CMD uname`
+
+	var err error
+
+	result, err := execCommand(t, []byte(fileText), "docker", "script")
+	if err != nil {
+		return
+	}
+
+	expectedResult := "assasa"
+	actualResult := result
+	assertEquals(t, expectedResult, actualResult)
+}
+
+func execCommand(t *testing.T, stdin []byte, name string, arg ...string) (string, error) {
 	var bytes []byte
 	var err error
 
 	cmd := exec.Command(name, arg...)
+	if stdin != nil {
+		_, err := cmd.Stdin.Read(stdin)
+		if err != nil {
+			return "", err
+		}
+	}
+
 	err = cmd.Wait()
 	if err != nil {
 		t.Errorf("%s", err)
