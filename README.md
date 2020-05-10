@@ -30,13 +30,23 @@ docker script .
 # Dockerfile executed on Linux
 ```
 
-Also `docker plugin` can execute Docker commands from stdin:
+Also `docker plugin` can execute Docker commands from stdin...
 ```shell script
 docker script <<< 'EOF'
     from alpine
     RUN echo 'in RUN'
     CMD echo 'in CMD'
 'EOF'
+# in RUN
+# in CMD
+```
+
+... or from string input:
+```shell script
+docker script <<< "
+    from alpine
+    RUN echo 'in RUN'
+    CMD echo 'in CMD'"
 # in RUN
 # in CMD
 ```
