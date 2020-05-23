@@ -27,13 +27,13 @@ commands, but it is not at all transferable - it would be better to have a singl
 *(I believe that tools like this one might make Docker a casual tool rather than a strictly devops tool, which is what
 it's generally considered to be, at least from my experience)*
 
-### Example
+### Examples
 
 `docker script` command can be run in a directory containing a `Dockerfile`, just like `docker build` (execution results
 are presented as comments):
 ```shell script
-echo 'FROM alpine
-CMD echo "Dockerfile executed on $(uname)"' > Dockerfile
+echo "FROM alpine
+CMD echo Dockerfile executed on $(uname)" > Dockerfile
 
 docker script .
 # Dockerfile executed on Linux
@@ -41,18 +41,18 @@ docker script .
 
 Also `docker plugin` can execute Docker commands from stdin...
 ```shell script
-docker script <<< 'EOF'
+docker script << 'EOF'
     from alpine
     RUN echo 'in RUN'
     CMD echo 'in CMD'
-'EOF'
+EOF
 # in RUN
 # in CMD
 ```
 
 ... or from string input:
 ```shell script
-docker script <<< "
+docker script "
     from alpine
     RUN echo 'in RUN'
     CMD echo 'in CMD'"

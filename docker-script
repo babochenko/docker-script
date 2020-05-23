@@ -32,13 +32,19 @@ case "$1" in
 		;;
 esac
 
+cleanup() {
+	local tag="$1"
+	sudo docker rm $(docker ps --all | grep "$tag" | awk '{print $1}') && \
+	sudo docker rmi "$tag"
+}
+
 run_from_file() {
 	local dockerfile="$1"
 	local tag
 	tag="tmp_$(date +%N)" 
 	sudo docker build -t "$tag" "$args" && \
 	sudo docker run -it "$tag" && \
-	sudo docker rmi "$tag"
+	cleanup "$tag"
 }
 
 run_from_string() {
@@ -47,8 +53,7 @@ run_from_string() {
 	tag="tmp_$(date +%N)" 
 	sudo docker build -t "$tag" - <<< "$args" && \
 	sudo docker run -it "$tag" && \
-	sudo docker rm $(docker ps --all | grep "$tag" | awk '{print $1}') && \
-	sudo docker rmi "$tag"
+	cleanup "$tag"
 }
 
 shift
