@@ -10,6 +10,11 @@ resources created during execution (container + image)
 ```shell script
 ./install.sh
 ```
+... or just download `docker-script` file and run this:
+```shell script
+chmod +x docker-script
+mv docker-script ~/.docker/cli-plugins
+```
 
 ### Motivation
 
