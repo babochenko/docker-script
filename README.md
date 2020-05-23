@@ -21,13 +21,13 @@ mv docker-script ~/.docker/cli-plugins/
 
 ### Motivation
 
-This plugin is an elementary effort to try make docker more accessible for basic prototyping. This might include:
+This plugin is an elementary effort to try make docker more accessible for basic prototyping. Some of prototyping use cases might be:
 - testing out some script / functionality in an isolated environment before running it locally
 - executing same Dockerfile in different Linux distributions to verify that it works on each of them
 
 This plugin tries to make such simple tasks doable in as few lines of code as possible
 
-You can always use a simple shell script which combines `docker build` and `docker run` with additional resource cleanup commands, but it is not at all transferable - it would be better to have a single reusable plugin
+While you could always use a simple shell script which combines `docker build` and `docker run` with additional resource cleanup commands, this workflow is not very transferable - it would be better to have a single reusable plugin
 
 *(I believe that tools like this one might make Docker a casual tool rather than a strictly devops tool, which is what
 it's generally considered to be, at least from my experience)*
