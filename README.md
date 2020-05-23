@@ -1,6 +1,6 @@
 ## Dockerfile One-Line Runner
 
-![https://travis-ci.com/github/stasmihailov/dockerfile-runner](https://api.travis-ci.com/stasmihailov/dockerfile-runner.svg?branch=master)
+![[dockerfile runner badge](https://travis-ci.com/github/stasmihailov/dockerfile-runner)](https://api.travis-ci.com/stasmihailov/dockerfile-runner.svg?branch=master)
 
 Adds ability to build AND run Dockerfiles in one command via `docker script` command. Also cleans up
 resources created during execution (container + image)
