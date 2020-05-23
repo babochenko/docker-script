@@ -13,7 +13,10 @@ resources created during execution (container + image)
 ... or just download `docker-script` file and run this:
 ```shell script
 chmod +x docker-script
-mv docker-script ~/.docker/cli-plugins
+# creates docker plugin directory
+[[ -d ~/.docker/cli-plugins/ ]] || mkdir -p ~/.docker/cli-plugins/  
+# puts plugin into plugin directory
+mv docker-script ~/.docker/cli-plugins/ 
 ```
 
 ### Motivation
