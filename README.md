@@ -1,4 +1,4 @@
-## Dockerfile One-Line Runner
+## One-Line Runner of Dockerfiles 
 
 [![dockerfile runner badge](https://api.travis-ci.com/stasmihailov/dockerfile-runner.svg?branch=master)](https://travis-ci.com/github/stasmihailov/dockerfile-runner)
 
