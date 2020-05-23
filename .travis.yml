@@ -1,4 +1,33 @@
 os: linux
 
-script:
-- ./install.sh
+jobs:
+  include:
+    - stage: test
+      script:
+      - ./install.sh
+      - ./.travis/test-curdir.sh
+    - stage: test
+      script:
+      - ./install.sh
+      - ./.travis/test-local-filepath.sh
+    - stage: test
+      script:
+      - ./install.sh
+      - ./.travis/test-filepath.sh
+    - stage: test
+      script:
+      - ./install.sh
+      - ./.travis/test-filedir.sh
+    - stage: test
+      script:
+      - ./install.sh
+      - ./.travis/test-stdin.sh
+    - stage: test
+      script:
+      - ./install.sh
+      - ./.travis/test-heredoc.sh
+    - stage: test
+      script:
+      - ./install.sh
+      - ./.travis/test-fallback-curdir.sh
+
