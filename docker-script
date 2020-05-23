@@ -1,16 +1,82 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# vim:set noet sts=0 sw=4 ts=4:
 
-if [[ "$1" == "docker-cli-plugin-metadata" ]]; then
-cat << HERE
+help='usage: docker script [ path | string | << stdin ]
+
+path: path to Dockerfile or to directory to a dockerfile
+      can be omitted if Dockerfile is present in current directory
+
+string: string representation of a Dockerfile, possibly as
+        a result of `cat Dockerfile` command
+
+stdin: Dockerfile passed from stdin or pipe, e.g. "cat Dockerfile | docker script"
+       or "docker script << EOF..."
+'
+metadata='
 {
      "SchemaVersion": "0.1.0",
      "Vendor": "https://github.com/stasmihailov/",
      "Version": "v0.1.0",
      "ShortDescription": "Dockerfile Runner for CLI"
 }
-HERE
-exit
-fi
+'
 
-echo args: "${@}"
+case "$1" in
+	docker-cli-plugin-metadata)
+		echo "$metadata"
+		exit
+		;;
+	help|-h|--help)
+		echo "$help"
+		exit
+		;;
+esac
+
+run_from_file() {
+	local dockerfile="$1"
+	local tag
+	tag="tmp_$(date +%N)" 
+	sudo docker build -t "$tag" "$args" && \
+	sudo docker run -it "$tag" && \
+	sudo docker rmi "$tag"
+}
+
+run_from_string() {
+	local dockerfile="$1"
+	local tag
+	tag="tmp_$(date +%N)" 
+	sudo docker build -t "$tag" - <<< "$args" && \
+	sudo docker run -it "$tag" && \
+	sudo docker rm $(docker ps --all | grep "$tag" | awk '{print $1}') && \
+	sudo docker rmi "$tag"
+}
+
+shift
+args="${*}"
+if [[ -f "$args" ]]; then
+	dockerfile="$(dirname "$args")"
+	run_from_file "$dockerfile"
+elif [[ -f "$args/Dockerfile" ]]; then
+	run_from_file "$args/Dockerfile"
+elif [[ -n "$args" ]]; then
+	dockerfile="$args"
+	run_from_string "$dockerfile"
+elif [[ -f './Dockerfile' ]]; then
+	run_from_file '.'
+else
+	__=""
+	stdin=""
+	read -r -N1 -t1 __  && {
+		(( $? <= 128 )) && {
+			IFS= read -rd '' stdin
+			stdin="$__$stdin"
+		}
+	}
+
+	if [[ -n "$stdin" ]]; then
+		run_from_string "$stdin"
+	else
+		echo "$help"
+	fi
+fi
 
