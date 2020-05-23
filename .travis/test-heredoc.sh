@@ -5,6 +5,4 @@ cmd uname
 EOF
 )"
 
-[[ "$expectedResult" == "$actualResult" ]]
-expectedEqualsActual=$?
-exit $expectedEqualsActual
+./__verify.sh "$expectedResult" "$actualResult"

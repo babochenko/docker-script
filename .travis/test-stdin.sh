@@ -6,6 +6,4 @@ cmd uname
 expectedResult="Linux"
 actualResult="$(echo "$script" | docker script)"
 
-[[ "$expectedResult" == "$actualResult" ]]
-expectedEqualsActual=$?
-exit $expectedEqualsActual
+./__verify.sh "$expectedResult" "$actualResult"

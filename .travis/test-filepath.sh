@@ -7,7 +7,5 @@ EOF
 expectedResult="Linux"
 actualResult="$(docker script testdir/Dockerfile)"
 
-[[ "$expectedResult" == "$actualResult" ]]
-expectedEqualsActual=$?
-exit $expectedEqualsActual
+./__verify.sh "$expectedResult" "$actualResult"
 
