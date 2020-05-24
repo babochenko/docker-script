@@ -34,7 +34,7 @@ esac
 
 cleanup() {
 	local tag="$1"
-	sudo docker rm $(docker ps --all | grep "$tag" | awk '{print $1}') && \
+	sudo docker rm $(docker ps --all | grep "$tag" | awk '{print $1}')
 	sudo docker rmi "$tag"
 }
 
@@ -42,8 +42,8 @@ run_from_file() {
 	local dockerfile="$1"
 	local tag
 	tag="tmp_$(date +%N)" 
-	sudo docker build -t "$tag" "$args" && \
-	sudo docker run -it "$tag" && \
+	sudo docker build -t "$tag" "$dockerfile" && \
+	sudo docker run -it "$tag"
 	cleanup "$tag"
 }
 
@@ -51,8 +51,9 @@ run_from_string() {
 	local dockerfile="$1"
 	local tag
 	tag="tmp_$(date +%N)" 
-	sudo docker build -t "$tag" - <<< "$args" && \
-	sudo docker run -it "$tag" && \
+	sudo docker build -t "$tag" - <<< "$dockerfile" && {
+	   	2>/dev/null sudo docker run -it "$tag" || sudo docker run "$tag"
+	}
 	cleanup "$tag"
 }
 
