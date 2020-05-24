@@ -4,8 +4,6 @@ cmd uname
 EOF
 
 echo '>>> TEST'
-docker build
-echo '>>> TEST 2'
 docker script .
 echo '>>> END TEST'
 
