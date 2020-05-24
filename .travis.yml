@@ -6,35 +6,35 @@ jobs:
       name: "./test-curdir.sh"
       script:
       - ./install.sh
-      - cd ./.travis/ && ./test-curdir.sh
+      - cd ./.travis/ && bash ./test-curdir.sh
     - stage: test
       name: "./test-local-filepath.sh"
       script:
       - ./install.sh
-      - cd ./.travis/ && ./test-local-filepath.sh
+      - cd ./.travis/ && bash ./test-local-filepath.sh
     - stage: test
       name: "./test-filepath.sh"
       script:
       - ./install.sh
-      - cd ./.travis/ && ./test-filepath.sh
+      - cd ./.travis/ && bash ./test-filepath.sh
     - stage: test
       name: "./test-filedir.sh"
       script:
       - ./install.sh
-      - cd ./.travis/ && ./test-filedir.sh
+      - cd ./.travis/ && bash ./test-filedir.sh
     - stage: test
       name: "./test-stdin.sh"
       script:
       - ./install.sh
-      - cd ./.travis/ && ./test-stdin.sh
+      - cd ./.travis/ && bash ./test-stdin.sh
     - stage: test
       name: "./test-heredoc.sh"
       script:
       - ./install.sh
-      - cd ./.travis/ && ./test-heredoc.sh
+      - cd ./.travis/ && bash ./test-heredoc.sh
     - stage: test
       name: "./test-fallback-curdir.sh"
       script:
       - ./install.sh
-      - cd ./.travis/ && ./test-fallback-curdir.sh
+      - cd ./.travis/ && bash ./test-fallback-curdir.sh
 
