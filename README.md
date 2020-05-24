@@ -65,6 +65,11 @@ docker script "
 # in CMD
 ```
 
+following command allocates a TTY in container and lets you execute arbitrary commands:
+```shell script
+docker script from ubuntu
+```
+
 Also, you could run single dockerfile on different distributions:
 ```shell script
 for linux in alpine ubuntu debian 'vcatechnology/linux-mint'; do
