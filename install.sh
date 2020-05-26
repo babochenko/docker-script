@@ -7,7 +7,6 @@ if [[ ! -d "$installation_dir" ]]; then
 fi
 
 plugin="docker-script"
-cp "$plugin" "$installation_dir"
+cp "./bin/usr/lib/docker/cli-plugins/${plugin}" "$installation_dir"
 chmod +x "$installation_dir"/"$plugin"
 echo "installed $plugin into $installation_dir"
-

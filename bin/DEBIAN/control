@@ -1,0 +1,8 @@
+Package: dockerscript
+Version: 1.0
+Architecture: all
+Essential: no
+Priority: optional
+Depends: docker
+Maintainer: Denis Babochenko
+Description: Builds and runs Dockerfiles in one command
