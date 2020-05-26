@@ -1,2 +1,0 @@
-plugin_dir='/usr/lib/docker/cli-plugins/'
-[[ -d "$plugin_dir" ]] || mkdir -p "$plugin_dir"
