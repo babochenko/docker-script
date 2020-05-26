@@ -27,7 +27,7 @@ package_dir="${output_dir}/${package_name}"
 cleanup-before-build
 
 # prepare scripts
-[[ -f './bin/DEBIAN/preinst' ]] && chmod +x './bin/DEBIAN/preinst' || echo 12
+[[ -f './bin/DEBIAN/preinst' ]] && chmod +x './bin/DEBIAN/preinst'
 
 # copy package data to build directory
 cp -r ./bin "$package_dir"

@@ -7,5 +7,6 @@ if [[ ! -f "$package" ]]; then
 fi
 
 echo 'installing package...'
-sudo dpkg -i "$package"
-echo 'package installed!'
+sudo dpkg -i "$package" \
+    && echo 'package installed!' \
+    || echo "can't install package! exiting..."
