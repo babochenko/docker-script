@@ -31,8 +31,13 @@ cleanup-before-build
 
 # copy package data to build directory
 cp -r ./bin "$package_dir"
+
+# post-copy
 readme='./README.md'
 [[ -f "${readme}" ]] && cp "${readme}" "${package_dir}/usr/share/doc/dockerscript/"
+
+# change owner of package to "root"
+chown root "${package_dir}/usr"
 
 # create package
 dpkg-deb --build "$package_dir"
