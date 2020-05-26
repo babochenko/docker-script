@@ -5,7 +5,7 @@ cleanup-before-build() {
 }
 
 cleanup-after-build() {
-    rm -rf ./build/*/
+    sudo rm -rf ./build/*/
 }
 
 trap cleanup-after-build EXIT
@@ -37,7 +37,7 @@ readme='./README.md'
 [[ -f "${readme}" ]] && cp "${readme}" "${package_dir}/usr/share/doc/dockerscript/"
 
 # change owner of package to "root"
-chown root "${package_dir}/usr"
+sudo chown root "${package_dir}/usr"
 
 # create package
 dpkg-deb --build "$package_dir"
