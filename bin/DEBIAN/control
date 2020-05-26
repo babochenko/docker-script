@@ -4,5 +4,5 @@ Architecture: all
 Essential: no
 Priority: optional
 Depends: docker
-Maintainer: Denis Babochenko
+Maintainer: Denis Babochenko <babochenko.denis@yandex.ru>
 Description: Builds and runs Dockerfiles in one command
