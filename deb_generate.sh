@@ -36,9 +36,12 @@ cp -r ./bin "$package_dir"
 readme='./README.md'
 [[ -f "${readme}" ]] && cp "${readme}" "${package_dir}/usr/share/doc/dockerscript/"
 
+# generate changelog.gz
+gzip -9 "${package_dir}/usr/share/doc/dockerscript/changelog"
+
 # change owner and group of package to "root"
-sudo chown root "${package_dir}/usr"
-sudo chgrp root "${package_dir}/usr"
+sudo chown root -R "${package_dir}/usr"
+sudo chgrp root -R "${package_dir}/usr"
 
 # create package
 dpkg-deb --build "$package_dir"
