@@ -5,4 +5,14 @@ Essential: no
 Priority: optional
 Depends: docker
 Maintainer: Denis Babochenko <babochenko.denis@yandex.ru>
+Homepage: https://github.com/stasmihailov/docker-build-and-run
 Description: Builds and runs Dockerfiles in one command
+  dockerscript is a cli docker plugin which enables execution of Dockerfiles
+  via a single "docker script" command. This command builds an image, then
+  starts a container with that image and attaches to it via a tty.
+  .
+  For example, "docker script from ubuntu" starts an instance of ubuntu, since
+  "from ubuntu" is a valid Dockerfile.
+  .
+  You could pass a link to Dockerfile or directory containing it to this command,
+  e.g. "docker script /path/to/my/Dockerfile"
