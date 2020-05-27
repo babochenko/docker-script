@@ -1,7 +1,16 @@
 os: linux
 
+stages:
+  - verify_package
+  - test
+
 jobs:
   include:
+    - stage: verify_package
+      name "verify debian package"
+      script:
+      - ./deb_install.sh
+      - cd ./.travis/ && ./verify_debian-package.sh
     - stage: test
       name: "./test-curdir.sh"
       script:
