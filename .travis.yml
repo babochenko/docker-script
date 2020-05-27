@@ -7,7 +7,7 @@ stages:
 jobs:
   include:
     - stage: verify_package
-      name "verify debian package"
+      name: "verify debian package"
       script:
       - ./deb_install.sh
       - cd ./.travis/ && ./verify_debian-package.sh
