@@ -1,13 +1,13 @@
 Standards-Version: 4.5.0
 Source: dockerscript
+Maintainer: Denis Babochenko <babochenko.denis@yandex.ru>
+Homepage: https://github.com/stasmihailov/docker-build-and-run
+
 Package: dockerscript
-Version: 1.0
 Architecture: all
 Section: x11
 Priority: optional
 Depends: docker
-Maintainer: Denis Babochenko <babochenko.denis@yandex.ru>
-Homepage: https://github.com/stasmihailov/docker-build-and-run
 Description: Builds and runs Dockerfiles in one command
  dockerscript is a cli docker plugin which enables execution of Dockerfiles
  via a single "docker script" command. This command builds an image, then
