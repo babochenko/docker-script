@@ -12,8 +12,8 @@ trap cleanup-after-build EXIT
 
 # parse config
 config='./bin/DEBIAN/control'
-2>/dev/null command yq || {
-    2>/dev/null command pip && {
+>/dev/null command yq || {
+    >/dev/null command pip && {
         yes | >/dev/null pip install yq
         package="$(yq -r .Package "$config")"
         version="$(yq -r .Version "$config")"
