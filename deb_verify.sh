@@ -5,4 +5,4 @@
     yes | apt-get install lintian
 }
 
-lintian --info ./build/dockerscript_1_all.deb
+lintian --info "$(find ./build/ -name 'dockerscript*.deb')"
