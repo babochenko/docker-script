@@ -10,13 +10,20 @@ cleanup-after-build() {
 
 trap cleanup-after-build EXIT
 
-2>/dev/null command yq || yes | >/dev/null pip install yq
-
 # parse config
 config='./bin/DEBIAN/control'
-package="$(yq -r .Package "$config")"
-version="$(yq -r .Version "$config")"
-architecture="$(yq -r .Architecture "$config")"
+2>/dev/null command yq || {
+    2>/dev/null command pip && {
+        yes | >/dev/null pip install yq
+        package="$(yq -r .Package "$config")"
+        version="$(yq -r .Version "$config")"
+        architecture="$(yq -r .Architecture "$config")"
+    } || {
+        package="$(cat "$config" | grep 'Package:' | awk '{print $2}')"
+        version="$(cat "$config" | grep 'Version:' | awk '{print $2}')"
+        architecture="$(cat "$config" | grep 'Architecture:' | awk '{print $2}')"
+    }
+}
 
 output_dir="./build"
 [[ -d "$output_dir" ]] || mkdir "$output_dir"
