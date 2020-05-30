@@ -11,6 +11,7 @@ jobs:
       name: "verify debian package"
       script:
       - ./install.sh
+      - apt -f install
       - cd ./.travis/ && ./verify_debian-package.sh
     - stage: test
       name: "./test-curdir.sh"
