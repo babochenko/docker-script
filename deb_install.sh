@@ -5,8 +5,6 @@ package="$(find ./build/ -name '*.deb')"
     yes | sudo apt-get install docker
 }
 
-docker
-
 if [[ ! -f "$package" ]]; then
     echo 'could not find package to install! exiting...'
     exit 1
