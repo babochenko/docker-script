@@ -5,7 +5,7 @@ cleanup-before-build() {
 }
 
 cleanup-after-build() {
-    sudo rm -rf ./build/*/
+    rm -rf ./build/*/
 }
 
 trap cleanup-after-build EXIT
@@ -40,8 +40,8 @@ readme='./README.md'
 gzip -9 "${package_dir}/usr/share/doc/dockerscript/changelog"
 
 # change owner and group of package to "root"
-sudo chown root -R "${package_dir}/usr"
-sudo chgrp root -R "${package_dir}/usr"
+chown root -R "${package_dir}/usr"
+chgrp root -R "${package_dir}/usr"
 
 # create package
 dpkg-deb --build "$package_dir"

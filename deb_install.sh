@@ -2,7 +2,7 @@
 package="$(find ./build/ -name '*.deb')"
 
 >/dev/null command -p docker || {
-    yes | sudo apt-get install docker
+    yes | apt-get install docker
 }
 
 if [[ ! -f "$package" ]]; then
@@ -11,6 +11,6 @@ if [[ ! -f "$package" ]]; then
 fi
 
 echo 'installing package...'
-sudo dpkg -i "$package" \
+dpkg -i "$package" \
     && echo 'package installed!' \
     || { echo "can't install package! exiting..."; exit 1; }
