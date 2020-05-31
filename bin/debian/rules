@@ -13,5 +13,9 @@
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
 
+override_dh_install:
+	dh_install usr/lib usr/lib
+	dh_install usr/share usr/share
+
 %:
 	dh $@
