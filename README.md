@@ -21,7 +21,7 @@ mv docker-script ~/.docker/cli-plugins/
 
 ### Basic Usage
 ```shell script
-# "from ubuntu" is a valid dockerfile
+# "from ubuntu" is a valid Dockerfile
 docker script from ubuntu
 # command above starts container with ubuntu and opens a tty in it
 # press <Ctrl-D> to exit and remove container and temporary image
