@@ -7,4 +7,4 @@ cleanup (){
 trap cleanup EXIT
 
 cd bin/
-bzr builddeb -- -nc -us -uc
+bzr builddeb --result-dir=../build -- -nc -us -uc

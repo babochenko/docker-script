@@ -3,7 +3,7 @@
 gpg_key=$1
 
 ppa='ppa:babochenko/ppa'
-changes="$(find . -name '*.changes')"
+changes="$(find ./build/ -name '*.changes')"
 
 # sign .changes file with a GPG key
 debsign -k "$gpg_key" "$changes"
