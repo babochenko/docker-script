@@ -19,6 +19,14 @@ chmod +x docker-script
 mv docker-script ~/.docker/cli-plugins/ 
 ```
 
+### Basic Usage
+```shell script
+# "from ubuntu" is a valid dockerfile
+docker script from ubuntu
+# command above starts container with ubuntu and opens a tty in it
+# <Ctrl-D> to exit and remove container and temporary image
+```
+
 ### Motivation
 
 This plugin is an elementary effort to try make docker more accessible for basic prototyping. Some of prototyping use cases might be:
@@ -32,7 +40,7 @@ While you could always use a simple shell script which combines `docker build` a
 *(I believe that tools like this one might make Docker a casual tool rather than a strictly devops tool, which is what
 it's generally considered to be, at least from my experience)*
 
-### Examples
+### Extended Examples
 
 `docker script` command can be run in a directory containing a `Dockerfile`, just like `docker build` (execution results
 are presented as comments):
@@ -79,4 +87,3 @@ for linux in alpine ubuntu debian 'vcatechnology/linux-mint'; do
         CMD uname -r"
 done
 ```
-
