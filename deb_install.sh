@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 package="$(find ./build/ -name '*.deb')"
 
->/dev/null command -p docker || {
+2>/dev/null 1>&2 command -p docker || {
     yes | apt-get install docker
 }
 
