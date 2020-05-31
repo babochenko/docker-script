@@ -2,6 +2,7 @@ Standards-Version: 4.5.0
 Source: dockerscript
 Maintainer: Denis Babochenko <babochenko.denis@yandex.ru>
 Homepage: https://github.com/stasmihailov/docker-build-and-run
+Vcs-Git: https://github.com/stasmihailov/docker-build-and-run
 
 Package: dockerscript
 Architecture: all
