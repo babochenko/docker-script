@@ -3,7 +3,7 @@ Version: 1.0
 Architecture: all
 Section: x11
 Priority: optional
-Depends: docker
+Depends: docker | docker.io | docker-ce
 Maintainer: Denis Babochenko <babochenko.denis@yandex.ru>
 Homepage: https://github.com/stasmihailov/docker-build-and-run
 Description: Builds and runs Dockerfiles in one command
