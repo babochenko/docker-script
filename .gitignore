@@ -9,3 +9,5 @@
 .idea/
 *.iml
 build/
+build-area/
+.bzr/
