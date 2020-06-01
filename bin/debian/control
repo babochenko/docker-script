@@ -8,7 +8,7 @@ Package: dockerscript
 Architecture: all
 Section: x11
 Priority: optional
-Depends: docker
+Depends: docker | docker.io | docker-ce
 Description: Builds and runs Dockerfiles in one command
  dockerscript is a cli docker plugin which enables execution of Dockerfiles
  via a single "docker script" command. This command builds an image, then
