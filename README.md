@@ -7,16 +7,17 @@ resources created during execution (container + image)
 
 ### Installation
 
+You could install plugin by downloading the .deb file from latest release at [releases page](https://github.com/stasmihailov/docker-build-and-run/releases) and installing it as follows:
 ```shell script
-./install.sh
+# requires either root or sudo privileges
+dpkg -i dockerscript_{version}.deb 
 ```
-... or just download `docker-script` file and run this:
+
+Or, you could build and install plugin from sources:
+
 ```shell script
-chmod +x docker-script
-# creates docker plugin directory
-[[ -d ~/.docker/cli-plugins/ ]] || mkdir -p ~/.docker/cli-plugins/  
-# puts plugin into plugin directory
-mv docker-script ~/.docker/cli-plugins/ 
+# requires either root or sudo privileges
+./install.sh
 ```
 
 ### Basic Usage
