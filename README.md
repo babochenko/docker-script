@@ -1,7 +1,7 @@
 ## One-Line Runner of Dockerfiles 
 
 [![dockerfile runner badge](https://api.travis-ci.com/stasmihailov/dockerfile-runner.svg?branch=master)](https://travis-ci.com/github/stasmihailov/dockerfile-runner)
-[https://github.com/stasmihailov/docker-build-and-run/releases/latest/](https://img.shields.io/badge/dynamic/json?label=latest&query=tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fstasmihailov%2Fdocker-build-and-run%2Freleases%2Flatest)
+[![latest release](https://img.shields.io/badge/dynamic/json?label=latest&query=tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fstasmihailov%2Fdocker-build-and-run%2Freleases%2Flatest)](https://github.com/stasmihailov/docker-build-and-run/releases/latest)
 
 Adds ability to build AND run Dockerfiles in one command via `docker script` command. Also cleans up
 resources created during execution (container + image)
