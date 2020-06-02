@@ -14,8 +14,8 @@
 
 
 override_dh_install:
-	dh_install usr/lib usr/lib
-	dh_install usr/share usr/share
+	dh_install usr/lib/* usr/
+	dh_install usr/share/* usr/
 
 %:
 	dh $@
