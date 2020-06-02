@@ -11,9 +11,9 @@ jobs:
       - id: release-info
         run: cd bin && echo "::set-output name=description::$(dpkg-parsechangelog -S changes | tail -n1)"
       - uses: "marvinpinto/action-automatic-releases@latest"
-          with:
-            automatic_release_tag: "latest"
-            prerelease: false
-            title: "${{ steps.release-info.outputs.description }}"
-            files: |
-              build/dockerscript*.deb
+        with:
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "${{ steps.release-info.outputs.description }}"
+          files: |
+            build/dockerscript*.deb
