@@ -9,3 +9,5 @@ changes="$(find ./build/ -name '*.changes')"
 debsign -k "$gpg_key" "$changes"
 # push .changes to Launchpad PPA
 dput "$ppa" "$changes"
+
+dupload --to='ftp-master' "$changes"
