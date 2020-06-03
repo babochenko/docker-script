@@ -72,6 +72,19 @@ task uninstall() {
     }
 }
 
+task sign() {
+    doLast {
+        def gpg_key = System.env.DOCKERSCRIPT_GPG_KEY
+        if (gpg_key == null) {
+            throw new GradleException('No gpg key provided! Exiting...')
+        }
+
+        def changes = new FileNameFinder().getFileNames('./build/', '*.changes')[0]
+        // sign .changes file with a GPG key
+        run "debsign -k '$gpg_key' '$changes'"
+    }
+}
+
 def run(cmd) {
     exec {
         executable 'bash'
@@ -80,13 +93,9 @@ def run(cmd) {
 }
 
 def doUpload(target = 'ubuntu') {
-    def gpg_key = System.env.DOCKERSCRIPT_GPG_KEY
     def ppa = 'ppa:babochenko/ppa'
-
     def changes = new FileNameFinder().getFileNames('./build/', '*.changes')[0]
 
-    // sign .changes file with a GPG key
-    run "debsign -k '$gpg_key' '$changes'"
     // push .changes to Launchpad PPA
     run "dput '$ppa' '$changes'"
     // push package to Launchpad PPA
