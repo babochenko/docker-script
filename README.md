@@ -3,21 +3,18 @@
 [![dockerfile runner badge](https://api.travis-ci.com/stasmihailov/dockerfile-runner.svg?branch=master)](https://travis-ci.com/github/stasmihailov/dockerfile-runner)
 [![latest release](https://img.shields.io/badge/dynamic/json?label=latest&query=tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fstasmihailov%2Fdocker-build-and-run%2Freleases%2Flatest)](https://github.com/stasmihailov/docker-build-and-run/releases/latest)
 
-Adds ability to build AND run Dockerfiles in one command via `docker script` command. Also cleans up
-resources created during execution (container + image)
+Builds and runs Dockerfiles via `docker script` command. Also cleans up image and container which were created in process
 
 ### Installation
 You could install plugin by downloading the .deb file from latest release at [releases page](https://github.com/stasmihailov/docker-build-and-run/releases) and installing it as follows:
 ```shell script
-# requires either root or sudo privileges
-dpkg -i dockerscript_{version}.deb 
+sudo dpkg -i dockerscript_{version}.deb 
 ```
 
 Or, you could build and install plugin from sources:
 
 ```shell script
-# requires either root or sudo privileges
-./install.sh
+sudo ./gradlew install
 ```
 
 ### Basic Usage
