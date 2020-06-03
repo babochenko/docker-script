@@ -52,7 +52,7 @@ task install(dependsOn: preInstall) {
     }
 }
 
-task upload() {
+task upload(dependsOn: assemble) {
     doLast {
         def gpg_key = System.env.DOCKERSCRIPT_GPG_KEY
         def ppa = 'ppa:babochenko/ppa'
