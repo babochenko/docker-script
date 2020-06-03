@@ -1,5 +1,7 @@
 Standards-Version: 4.5.0
 Source: dockerscript
+Section: x11
+Priority: optional
 Maintainer: Denis Babochenko <babochenko.denis@yandex.ru>
 Homepage: https://github.com/stasmihailov/docker-build-and-run
 Vcs-Git: https://github.com/stasmihailov/docker-build-and-run
