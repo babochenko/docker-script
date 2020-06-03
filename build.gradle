@@ -7,7 +7,7 @@ task assemble(overwrite: true, dependsOn: clean) {
     doLast {
         //noinspection GroovyAssignabilityCheck
         run """
-        gbp buildpackage --git-export-dir='./build'
+        gbp buildpackage -b --git-export-dir='./build'
         """
     }
 }
@@ -59,7 +59,7 @@ task uploadToDebian(dependsOn: assemble) {
 
 task uninstall() {
     doLast {
-        run 'apt remove dockerscript'
+        run 'yes | apt remove dockerscript'
     }
 }
 
