@@ -11,3 +11,9 @@
 build/
 build-area/
 .bzr/
+
+# Gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
