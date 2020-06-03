@@ -3,13 +3,6 @@ plugins {
     id 'groovy'
 }
 
-def run(cmd) {
-    exec {
-        executable 'bash'
-        args "-c", cmd
-    }
-}
-
 task assemble(overwrite: true) {
     doLast {
         //noinspection GroovyAssignabilityCheck
@@ -54,17 +47,13 @@ task install(dependsOn: preInstall) {
 
 task upload(dependsOn: assemble) {
     doLast {
-        def gpg_key = System.env.DOCKERSCRIPT_GPG_KEY
-        def ppa = 'ppa:babochenko/ppa'
+        doUpload 'ubuntu'
+    }
+}
 
-        def changes = new FileNameFinder().getFileNames('./build/', '*.changes')[0]
-
-        // sign .changes file with a GPG key
-        run "debsign -k '$gpg_key' '$changes'"
-        // push .changes to Launchpad PPA
-        run "dput '$ppa' '$changes'"
-        // push package to Launchpad PPA
-        run "dupload --to='ftp-master' '$changes'"
+task uploadToDebian(dependsOn: assemble) {
+    doLast {
+        doUpload 'ftp-master'
     }
 }
 
@@ -72,4 +61,25 @@ task uninstall() {
     doLast {
         run 'apt remove dockerscript'
     }
+}
+
+def run(cmd) {
+    exec {
+        executable 'bash'
+        args "-c", cmd
+    }
+}
+
+def doUpload(target = 'ubuntu') {
+    def gpg_key = System.env.DOCKERSCRIPT_GPG_KEY
+    def ppa = 'ppa:babochenko/ppa'
+
+    def changes = new FileNameFinder().getFileNames('./build/', '*.changes')[0]
+
+    // sign .changes file with a GPG key
+    run "debsign -k '$gpg_key' '$changes'"
+    // push .changes to Launchpad PPA
+    run "dput '$ppa' '$changes'"
+    // push package to Launchpad PPA
+    run "dupload --to='$target' '$changes'"
 }
