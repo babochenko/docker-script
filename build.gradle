@@ -12,6 +12,15 @@ task assemble(overwrite: true, dependsOn: clean) {
     }
 }
 
+task assembleSources(dependsOn: clean) {
+    doLast {
+        //noinspection GroovyAssignabilityCheck
+        run """
+        gbp buildpackage -S --git-export-dir='./build'
+        """
+    }
+}
+
 task preInstall() {
     doLast {
         //noinspection GroovyAssignabilityCheck
@@ -45,7 +54,7 @@ task install(dependsOn: preInstall) {
     }
 }
 
-task upload(dependsOn: assemble) {
+task upload(dependsOn: assembleSources) {
     doLast {
         doUpload 'ubuntu'
     }
