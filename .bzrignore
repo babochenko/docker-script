@@ -10,7 +10,7 @@
 *.iml
 build/
 build-area/
-.bzr/
+.git/
 
 # Gradle
 .gradle/

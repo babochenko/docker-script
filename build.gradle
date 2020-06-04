@@ -1,0 +1,103 @@
+plugins {
+    id 'java'
+    id 'groovy'
+}
+
+task assemble(overwrite: true, dependsOn: clean) {
+    doLast {
+        //noinspection GroovyAssignabilityCheck
+        run """
+        gbp buildpackage -b --git-export-dir='./build'
+        """
+    }
+}
+
+task assembleSources(dependsOn: clean) {
+    doLast {
+        //noinspection GroovyAssignabilityCheck
+        run """
+        gbp buildpackage -S --git-export-dir='./build'
+        """
+    }
+}
+
+task preInstall() {
+    doLast {
+        //noinspection GroovyAssignabilityCheck
+        run """
+        package="\$(find ./build/ -name '*.deb')"
+    
+        2>/dev/null 1>&2 command -p docker || {
+            yes | apt-get install docker
+        }
+        
+        if [[ ! -f "\$package" ]]; then
+            echo 'could not find package to install! exiting...'
+            exit 1
+        fi
+        """
+    }
+}
+
+task install(dependsOn: preInstall) {
+    doLast {
+        println 'installing package...'
+
+        def debPackage = new FileNameFinder().getFileNames('./build/', '*.deb')[0]
+        def result = run "dpkg -i \"$debPackage\""
+
+        if (result.exitValue == 0) {
+            println 'package installed!'
+        } else {
+            println "can't install package! exiting..."
+        }
+    }
+}
+
+task upload(dependsOn: assembleSources) {
+    doLast {
+        doUpload 'ubuntu'
+    }
+}
+
+task uploadToDebian(dependsOn: assemble) {
+    doLast {
+        doUpload 'ftp-master'
+    }
+}
+
+task uninstall() {
+    doLast {
+        run 'yes | apt remove dockerscript'
+    }
+}
+
+task sign() {
+    doLast {
+        def gpg_key = System.env.DOCKERSCRIPT_GPG_KEY
+        if (gpg_key == null) {
+            throw new GradleException('No gpg key provided! Exiting...')
+        }
+
+        def changes = new FileNameFinder().getFileNames('./build/', '*.changes')[0]
+        // sign .changes file with a GPG key
+        run "debsign -k '$gpg_key' '$changes'"
+    }
+}
+
+def run(cmd) {
+    exec {
+        executable 'bash'
+        args "-c", cmd
+    }
+}
+
+def doUpload(target = 'ubuntu') {
+    def ppa = 'ppa:babochenko/ppa'
+    def changes = new FileNameFinder().getFileNames('./build/', '*.changes')[0]
+
+    // push .changes to Launchpad PPA
+    run "dput '$ppa' '$changes'"
+    // push package to Launchpad PPA
+    run "dupload --to='$target' '$changes'"
+}
