@@ -1,28 +1,27 @@
-## One-Line Runner of Dockerfiles 
-
 [![dockerfile runner badge](https://api.travis-ci.com/stasmihailov/dockerfile-runner.svg?branch=master)](https://travis-ci.com/github/stasmihailov/dockerfile-runner)
 [![latest release](https://img.shields.io/badge/dynamic/json?label=latest&query=tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fstasmihailov%2Fdocker-build-and-run%2Freleases%2Flatest)](https://github.com/stasmihailov/docker-build-and-run/releases/latest)
 
-Builds and runs Dockerfiles via `docker script` command. Also cleans up image and container which were created in process
+### Dockerscript 
 
-### Installation
-You could install plugin by downloading the .deb file from latest release at [releases page](https://github.com/stasmihailov/docker-build-and-run/releases) and installing it as follows:
-```shell script
-sudo dpkg -i dockerscript_{version}.deb 
-```
-
-Or, you could build and install plugin from sources:
-
-```shell script
-sudo ./gradlew install
-```
+Builds and runs Dockerfiles via `docker script` command
 
 ### Basic Usage
 ```shell script
-# "from ubuntu" is a valid Dockerfile
 docker script from ubuntu
-# command above starts container with ubuntu and opens a tty in it
-# press <Ctrl-D> to exit and remove container and temporary image
+```
+"from ubuntu" is a valid Dockerfile; therefore, this command runs an image of
+a latest Ubuntu release and opens a tty in it; you can <Ctrl-D> to stop and remove container
+
+### Installation
+- from Ubuntu PPA (if you trust me enough):
+```shell script
+add-apt-repository ppa:babochenko/ppa
+apt-get update
+apt-get install dockerscript
+```
+- from sources:
+```shell script
+sudo ./gradlew install
 ```
 
 ### Motivation
