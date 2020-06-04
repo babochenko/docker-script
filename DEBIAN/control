@@ -1,5 +1,5 @@
 Package: dockerscript
-Version: 1.0
+Version: 1.0.1
 Architecture: all
 Section: x11
 Priority: optional
