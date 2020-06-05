@@ -1,6 +1,15 @@
 plugins {
     id 'java'
     id 'groovy'
+    id "com.linkedin.python-cli" version "0.4.9"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.0'
 }
 
 task assemble(overwrite: true, dependsOn: clean) {
@@ -81,6 +90,13 @@ task sign() {
         def changes = new FileNameFinder().getFileNames('./build/', '*.changes')[0]
         // sign .changes file with a GPG key
         run "debsign -k '$gpg_key' '$changes'"
+    }
+}
+
+def run(cmd) {
+    exec {
+        executable 'bash'
+        args "-c", cmd
     }
 }
 
