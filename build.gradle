@@ -5,6 +5,8 @@ plugins {
 
 task assemble(overwrite: true, dependsOn: clean) {
     doLast {
+        installIfMissing 'git-buildpackage'
+
         //noinspection GroovyAssignabilityCheck
         run """
         gbp buildpackage -b --git-export-dir='./build'
@@ -23,14 +25,11 @@ task assembleSources(dependsOn: clean) {
 
 task preInstall() {
     doLast {
+        installIfMissing 'docker'
+
         //noinspection GroovyAssignabilityCheck
         run """
         package="\$(find ./build/ -name '*.deb')"
-    
-        2>/dev/null 1>&2 command -p docker || {
-            yes | apt-get install docker
-        }
-        
         if [[ ! -f "\$package" ]]; then
             echo 'could not find package to install! exiting...'
             exit 1
@@ -85,11 +84,12 @@ task sign() {
     }
 }
 
-def run(cmd) {
-    exec {
-        executable 'bash'
-        args "-c", cmd
+def installIfMissing(packageName) {
+    run """
+    2>/dev/null 1>&2 command -p "$packageName" || {
+        yes | apt-get install "$packageName"
     }
+    """
 }
 
 def doUpload(target = 'ubuntu') {
