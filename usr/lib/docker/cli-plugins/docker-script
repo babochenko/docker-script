@@ -59,11 +59,11 @@ run_from_string() {
 
 shift
 args="${*}"
-if [[ -f "$args" ]]; then
+if [[ -f "$args/Dockerfile" ]]; then
+	run_from_file "$args"
+elif [[ -f "$args" ]]; then
 	dockerfile="$(dirname "$args")"
 	run_from_file "$dockerfile"
-elif [[ -f "$args/Dockerfile" ]]; then
-	run_from_file "$args/Dockerfile"
 elif [[ -n "$args" ]]; then
 	dockerfile="$args"
 	run_from_string "$dockerfile"
