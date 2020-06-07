@@ -9,52 +9,36 @@ branches:
   only:
     - master
 
-commonTestScript:
-  - git checkout master # prevent travis from executing on a commit; otherwise git-buildbackage doesnt work
-  - sudo ./gradlew assemble && sudo ./gradlew install
-  - apt -f install
-  - cd ./.travis/
-
 jobs:
   include:
     - stage: verify_package
       name: "verify debian package"
-      script:
-      <<: commonTestScript
-      - ./verify_debian-package.sh
+      env: TEST_SUITE=./verify_debian-package.sh
     - stage: test
       name: "./test-curdir.sh"
-      script:
-      <<: commonTestScript
-      - ./test-curdir.sh
+      env: TEST_SUITE=./test-curdir.sh
     - stage: test
       name: "./test-local-filepath.sh"
-      script:
-      <<: commonTestScript
-      - ./test-local-filepath.sh
+      env: TEST_SUITE=./test-local-filepath.sh
     - stage: test
       name: "./test-filepath.sh"
-      script:
-      <<: commonTestScript
-      - ./test-filepath.sh
+      env: TEST_SUITE=./test-filepath.sh
     - stage: test
       name: "./test-filedir.sh"
-      script:
-      <<: commonTestScript
-      - ./test-filedir.sh
+      env: TEST_SUITE=./test-filedir.sh
     - stage: test
       name: "./test-stdin.sh"
-      script:
-      <<: commonTestScript
-      - ./test-stdin.sh
+      env: TEST_SUITE=./test-stdin.sh
     - stage: test
       name: "./test-heredoc.sh"
-      script:
-      <<: commonTestScript
-      - ./test-heredoc.sh
+      env: TEST_SUITE=./test-heredoc.sh
     - stage: test
       name: "./test-fallback-curdir.sh"
-      script:
-      <<: commonTestScript
-      - ./test-fallback-curdir.sh
+      env: TEST_SUITE=./test-fallback-curdir.sh
 
+script:
+  - git checkout master # prevent travis from executing on a commit; otherwise git-buildbackage doesnt work
+  - sudo ./gradlew assemble && sudo ./gradlew install
+  - apt -f install
+  - cd ./.travis/
+  - . "$TEST_SUITE"
