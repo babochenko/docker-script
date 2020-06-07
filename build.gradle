@@ -5,7 +5,7 @@ plugins {
 
 task assemble(overwrite: true, dependsOn: clean) {
     doLast {
-        installIfMissing 'git-buildpackage'
+        //installIfMissing 'git-buildpackage'
 
         //noinspection GroovyAssignabilityCheck
         run """
