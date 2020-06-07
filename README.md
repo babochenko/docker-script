@@ -19,7 +19,7 @@ add-apt-repository ppa:babochenko/ppa
 apt-get update
 apt-get install dockerscript
 ```
-- from sources (if you want to extend this plugin):
+- from sources:
 ```shell script
 sudo ./gradlew installBuildDependencies
 ./gradlew assemble
