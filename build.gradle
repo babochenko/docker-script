@@ -6,6 +6,7 @@ plugins {
 task installBuildDependencies() {
     doLast {
         installIfMissing 'gbp', 'git-buildpackage'
+        installIfMissing 'fakeroot'
     }
 }
 
