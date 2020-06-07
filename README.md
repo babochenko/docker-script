@@ -21,6 +21,8 @@ apt-get install dockerscript
 ```
 - from sources (if you want to extend this plugin):
 ```shell script
+sudo ./gradlew installBuildDependencies
+./gradlew assemble
 sudo ./gradlew install
 ```
 

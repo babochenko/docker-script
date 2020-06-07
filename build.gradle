@@ -3,10 +3,14 @@ plugins {
     id 'groovy'
 }
 
-task assemble(overwrite: true, dependsOn: clean) {
+task installBuildDependencies() {
     doLast {
         installIfMissing 'gbp', 'git-buildpackage'
+    }
+}
 
+task assemble(overwrite: true, dependsOn: clean) {
+    doLast {
         //noinspection GroovyAssignabilityCheck
         run """
         gbp buildpackage -b --git-export-dir='./build'
