@@ -5,6 +5,10 @@ stages:
   - verify_package
   - test
 
+branches:
+  only:
+    - master
+
 jobs:
   include:
     - stage: verify_package
