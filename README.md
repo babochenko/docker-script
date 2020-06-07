@@ -3,14 +3,14 @@
 
 ### Dockerscript 
 
-Builds and runs Dockerfiles via `docker script` command
+Builds an image and runs container from Dockerfile via `docker script` command
 
 ### Basic Usage
 ```shell script
 docker script from ubuntu
 ```
-"from ubuntu" is a valid Dockerfile; therefore, this command runs an image of
-a latest Ubuntu release and opens a tty in it; you can <Ctrl-D> to stop and remove container
+"from ubuntu" is a valid Dockerfile; therefore, this command runs a container of
+a latest Ubuntu release image and attaches a tty to it; you can <Ctrl-D> to stop and remove both container and image
 
 ### Installation
 - from Ubuntu PPA (if you trust me enough):
