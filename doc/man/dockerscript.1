@@ -1,0 +1,10 @@
+docker script [ path | string | << stdin ]
+
+path: path to Dockerfile or to directory to a dockerfile
+      can be omitted if Dockerfile is present in current directory
+
+string: string representation of a Dockerfile, possibly as
+        a result of `cat Dockerfile` command
+
+stdin: Dockerfile passed from stdin or pipe, e.g. "cat Dockerfile | docker script"
+       or "docker script << EOF..."
