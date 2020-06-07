@@ -13,15 +13,11 @@ docker script from ubuntu
 a latest Ubuntu release image and attaches a tty to it; you can <Ctrl-D> to stop and remove both container and image
 
 ### Installation
-- from Ubuntu PPA (if you trust me enough):
+- from Ubuntu PPA:
 ```shell script
 add-apt-repository ppa:babochenko/ppa
 apt-get update
 apt-get install dockerscript
-```
-- from sources:
-```shell script
-sudo ./gradlew install
 ```
 
 ### Motivation
