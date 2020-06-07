@@ -5,7 +5,7 @@ plugins {
 
 task assemble(overwrite: true, dependsOn: clean) {
     doLast {
-        //installIfMissing 'git-buildpackage'
+        installIfMissing 'gbp', 'git-buildpackage'
 
         //noinspection GroovyAssignabilityCheck
         run """
@@ -91,11 +91,11 @@ def run(cmd) {
     }
 }
 
-def installIfMissing(packageName) {
+def installIfMissing(packageName, packageToInstall = packageName) {
     run """
     2>/dev/null 1>&2 command -p "$packageName" || {
         apt update
-        yes | apt-get install "$packageName"
+        yes | apt-get install "$packageToInstall"
     }
     """
 }
