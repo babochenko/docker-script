@@ -10,7 +10,7 @@ Builds an image and runs container from Dockerfile via `docker script` command
 docker script from ubuntu
 ```
 "from ubuntu" is a valid Dockerfile; therefore, this command runs a container of
-a latest Ubuntu release image and attaches a tty to it; you can <Ctrl-D> to stop and remove both container and image
+a latest Ubuntu release image and attaches a tty to it; you can `<Ctrl-D>` to stop and remove both container and image
 
 ### Installation
 - from Ubuntu PPA:
@@ -18,6 +18,10 @@ a latest Ubuntu release image and attaches a tty to it; you can <Ctrl-D> to stop
 add-apt-repository ppa:babochenko/ppa
 apt-get update
 apt-get install dockerscript
+```
+- from sources (if you want to extend this plugin):
+```shell script
+sudo ./gradlew install
 ```
 
 ### Motivation
