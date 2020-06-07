@@ -94,6 +94,7 @@ def run(cmd) {
 def installIfMissing(packageName) {
     run """
     2>/dev/null 1>&2 command -p "$packageName" || {
+        sudo apt update
         yes | apt-get install "$packageName"
     }
     """
