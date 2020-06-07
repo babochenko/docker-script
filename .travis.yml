@@ -39,7 +39,9 @@ jobs:
 
 script:
   - git checkout master # prevent travis from executing on a commit; otherwise git-buildbackage doesnt work
-  - sudo ./gradlew assemble && sudo ./gradlew install
+  - sudo ./gradlew installBuildDependencies
+  - ./gradlew assemble
+  - sudo ./gradlew install
   - apt -f install
   - cd ./.travis/
   - . "$TEST_SUITE"
