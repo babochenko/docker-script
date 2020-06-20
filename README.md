@@ -1,7 +1,7 @@
 [![dockerfile runner badge](https://api.travis-ci.com/stasmihailov/dockerfile-runner.svg?branch=master)](https://travis-ci.com/github/stasmihailov/dockerfile-runner)
 [![latest release](https://img.shields.io/badge/dynamic/json?label=latest&query=tag_name&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fstasmihailov%2Fdocker-build-and-run%2Freleases%2Flatest)](https://github.com/stasmihailov/docker-build-and-run/releases/latest)
 
-_([request to add to debian distro](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=962303) so i dont lose it)_
+_([request to add to debian distro](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=962303) - added it here so i could track it)_
 
 ### Dockerscript 
 
