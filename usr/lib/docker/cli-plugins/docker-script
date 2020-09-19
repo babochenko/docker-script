@@ -42,8 +42,8 @@ run_from_file() {
 	local dockerfile="$1"
 	local tag
 	tag="tmp_$(date +%N)" 
-	docker build -t "$tag" "$dockerfile" && \
-	docker run -it "$tag"
+	docker build -t "$tag" "$dockerfile" $BUILD_ARGS && \
+	docker run -it "$tag" $RUN_ARGS
 	cleanup "$tag"
 }
 
@@ -51,21 +51,40 @@ run_from_string() {
 	local dockerfile="$1"
 	local tag
 	tag="tmp_$(date +%N)" 
-	docker build -t "$tag" - <<< "$dockerfile" && {
-	   	2>/dev/null docker run -it "$tag" || docker run "$tag"
+	docker build -t "$tag" $BUILD_ARGS - <<< "$dockerfile" && {
+	   	2>/dev/null docker run -it "$tag" || docker run "$tag" $RUN_ARGS
 	}
 	cleanup "$tag"
 }
 
 shift
-args="${*}"
-if [[ -f "$args/Dockerfile" ]]; then
-	run_from_file "$args"
-elif [[ -f "$args" ]]; then
-	dockerfile="$(dirname "$args")"
+script_path="$1"
+shift
+
+export BUILD_ARGS=""
+export RUN_ARGS=""
+for arg in $@; do
+	case "$arg" in
+		--build|-b)
+			export BUILD_ARGS="$2"
+			shift
+			shift
+			;;
+		--run|-r)
+			export RUN_ARGS="$2"
+			shift
+			shift
+			;;
+	esac
+done
+
+if [[ -f "$script_path/Dockerfile" ]]; then
+	run_from_file "$script_path"
+elif [[ -f "$script_path" ]]; then
+	dockerfile="$(dirname "$script_path")"
 	run_from_file "$dockerfile"
-elif [[ -n "$args" ]]; then
-	dockerfile="$args"
+elif [[ -n "$script_path" ]]; then
+	dockerfile="$script_path"
 	run_from_string "$dockerfile"
 elif [[ -f './Dockerfile' ]]; then
 	run_from_file '.'

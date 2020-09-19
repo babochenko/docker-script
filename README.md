@@ -49,8 +49,8 @@ are presented as comments):
 echo "FROM alpine
 CMD echo Dockerfile executed on $(uname)" > Dockerfile
 
-docker script .
-# Dockerfile executed on Linux
+docker script . --build "--build-arg KEY=VALUE"
+# Dockerfile executed on Linux, with custom build option --build-arg
 ```
 
 Also `docker plugin` can execute Docker commands from stdin...
